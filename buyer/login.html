@@ -46,7 +46,7 @@
                         <input type="password" name="password" id="password" placeholder="Password" required />
                         <button type="submit" id="login_btn" class="auth-btn" disabled>LOG IN</button>
                     </form>
-                    <a href="#" class="forgot-password">Forgot Password</a>
+                    <a href="./reset.html" class="forgot-password">Forgot Password</a>
 
                     <div class="login-card-divider">
                         <div class="parallel-line"></div>
@@ -175,7 +175,7 @@
 
         loginForm.addEventListener('submit', function(event){
             event.preventDefault();
-            console.log('Form Submitted');
+            console.log('Form Login Submitted');
         });
 
         loginBtn.addEventListener('click', AddData);

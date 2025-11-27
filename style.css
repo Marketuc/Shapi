@@ -140,10 +140,14 @@ button {
     margin: auto;
 }
 
+.login-card.auth-card {
+        width: 400px;
+        height: 459.6px;
+}
+
 .auth-card {
-    width: 400px;
-    height: 459.6px;
     background-color: var(--light-clr);
+    box-shadow: 0 4px 8px 0px #8888883b;
     border-radius: 4px;
 }
 
@@ -200,7 +204,7 @@ button {
     gap: 1em;
 }
 
-.auth-card-main {
+.login-card .auth-card-main {
     padding: 0 30px 30px 30px;
 }
 
@@ -285,3 +289,33 @@ button {
     color: var(--accent-clr);
 }
 
+.reset-password {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 600px;
+}
+
+.reset-password-card.auth-card {
+    width: 500px;
+    height: 275px;
+}
+
+.reset-password-card .auth-card-header {
+    display: flex;
+    align-items: center;
+    padding: 30px 28px;
+    margin-bottom: 15px;
+}
+
+.reset-password-card .auth-card-title {
+    width: 100%;
+    padding-right: 28px;
+    text-align: center;
+}
+
+.reset-password-card .auth-card-main {
+    padding: 0 80px 64px 80px;
+}
