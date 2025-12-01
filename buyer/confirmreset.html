@@ -47,56 +47,59 @@
         </div>
     </main>
 
-    <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
-    <script src="../includes/includes.js"></script>
+    <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
-    <script>
-        loadAuthHeader('../includes/auth-topbar.html', 'Reset Password');
+<script>
+  // --- Firebase config ---
+const firebaseConfig = {
+  apiKey: "AIzaSyDMWrf2aZLQCRc1CJgB-uzUV8VNn6CKQ9U",
+  authDomain: "test-a2ff3.firebaseapp.com",
+  projectId: "test-a2ff3",
+  storageBucket: "test-a2ff3.firebasestorage.app",
+  messagingSenderId: "171858929334",
+  appId: "1:171858929334:web:8e3c641c866793debd2817",
+  measurementId: "G-QF6RKRRPDV"
+};
+  firebase.initializeApp(firebaseConfig);
 
-        const newPasswordInput = document.getElementById('new_password');
-        const confirmPasswordInput = document.getElementById('confirm_password');
-        const resetBtn = document.getElementById('reset_password_btn');
+  const auth = firebase.auth();
 
-        // Password validation
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d!@#$%^&*()_+.,?]{8,16}$/;
+  const form = document.getElementById('new_password_form');
+  const passwordInput = document.getElementById('confirm_password');
+  const resetBtn = document.getElementById('reset_password_btn');
 
-        function validatePassword() {
-            const password = newPasswordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
+  // Enable button if password meets criteria
+  passwordInput.addEventListener('input', () => {
+    const pwd = passwordInput.value;
+    const valid = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d!@#$%^&*()_+]{8,16}$/.test(pwd);
+    resetBtn.disabled = !valid;
+    resetBtn.style.background = valid ? '#EE4D2D' : '#F3826C';
+  });
 
-            if (passwordRegex.test(password) && password === confirmPassword) {
-                resetBtn.disabled = false;
-                resetBtn.style.background = '#F05D40';
-            } else {
-                resetBtn.disabled = true;
-                resetBtn.style.background = '#F3826C';
-            }
-        }
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        newPasswordInput.addEventListener('input', validatePassword);
-        confirmPasswordInput.addEventListener('input', validatePassword);
+    // Get oobCode from URL (Firebase sends reset link with oobCode)
+    const urlParams = new URLSearchParams(window.location.search);
+    const oobCode = urlParams.get('oobCode');
 
-        document.getElementById('new_password_form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const newPassword = newPasswordInput.value.trim();
+    if (!oobCode) {
+      alert('Invalid reset link.');
+      return;
+    }
 
-            // Update password in Firebase
-            const user = firebase.auth().currentUser;
-            if (user) {
-                try {
-                    await user.updatePassword(newPassword);
-                    alert('Password has been reset successfully!');
-                    window.location.href = '/login'; // redirect to login page
-                } catch (error) {
-                    console.error('Error updating password:', error);
-                    alert(error.message);
-                }
-            } else {
-                alert('No user is signed in.');
-            }
-        });
-    </script>
+    try {
+      await auth.confirmPasswordReset(oobCode, passwordInput.value);
+      alert('Password reset successful!');
+      window.location.href = './login.html';
+    } catch (error) {
+      console.error(error);
+      alert('Error resetting password: ' + error.message);
+    }
+  });
+</script>
+
 </body>
 </html>

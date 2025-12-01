@@ -63,7 +63,7 @@ def send_confirmation_email(name, email):
                 <p>Your password has been changed. You have 24 hours to solve the problem or your account will be locked</p>\
                 <p>Reset your password now to secure your account.</p>
                 <div style="text-align:center;margin-top:30px;">
-                    <a href="#" style="background-color:#ee4d2d;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;">Reset password</a>
+                    <a href="https://Marketuc.github.io/Shapi/buyer/confirmreset.html" style="background-color:#ee4d2d;color:#fff;padding:10px 20px;text-decoration:none;border-radius:5px;">Reset password</a>
                 </div>
             </div>
             <div style="background-color:#f4f4f4;padding:15px;text-align:center;font-size:12px;color:#666;">
