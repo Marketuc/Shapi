@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Send Confirmation Email</title>
+</head>
+<body style="font-family: Arial; max-width: 600px; margin: 40px auto;">
+
+<h2>Send Confirmation Email</h2>
+
+<form id="mailForm">
+    <label>Name</label>
+    <input type="text" id="name" name="name" required style="width:100%; padding:8px;">
+
+    <label style="margin-top: 10px;">Email</label>
+    <input type="email" id="email" name="email" required style="width:100%; padding:8px;">
+
+    <button style="margin-top: 15px; padding: 10px 20px;">Send</button>
+</form>
+
+<div id="status" style="margin-top: 20px; font-weight: bold;"></div>
+
+<script>
+document.getElementById("mailForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const payload = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value
+    };
+
+    const res = await fetch("/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+        window.location.href = "success.html"; // redirect
+    } else {
+        document.getElementById("status").innerText = "❌ " + data.error;
+    }
+});
+</script>
+
+</body>
+</html>
