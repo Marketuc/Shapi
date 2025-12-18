@@ -10,35 +10,68 @@
 <div id="auth-header-container"></div>
 
 <main class="reset-password">
-  <div class="reset-password-card auth-card">
-    <div class="auth-card-header">
-      <a href="./login.html">
-        <!-- Back Arrow SVG -->
-        <svg viewBox="0 0 22 17" class="adQfSO" width="24" height="18.55" fill="#EE4D2D">
-          <g stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(-3, -6)">
-            <path d="M5.78416545,15.2727801 L12.9866648,21.7122915 C13.286114,22.0067577 13.286114,22.4841029 12.9866648,22.7785691 C12.6864297,23.0738103 12.200709,23.0738103 11.9004739,22.7785691 L3.29347136,15.0837018 C3.27067864,15.0651039 3.23845445,15.072853 3.21723364,15.0519304 C3.06240034,14.899273 2.99480814,14.7001208 3.00030983,14.5001937 C2.99480814,14.3002667 3.06240034,14.1003396 3.21723364,13.9476821 C3.23845445,13.9275344 3.2714646,13.9345086 3.29425732,13.9166857 L11.9004739,6.22026848 C12.200709,5.92657717 12.6864297,5.92657717 12.9866648,6.22026848 C13.286114,6.51628453 13.286114,6.99362977 12.9866648,7.288096 L5.78416545,13.7276073 L24.2140442,13.7276073 C24.6478918,13.7276073 25,14.0739926 25,14.5001937 C25,14.9263948 24.6478918,15.2727801 24.2140442,15.2727801 L5.78416545,15.2727801 Z"></path>
-          </g>
-        </svg>
-      </a>
-      <h2 class="auth-card-title">Reset Password</h2>
-    </div>
+   <style>
+    .reset-password {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+    }
 
-    <div class="auth-card-main">
-      <form id="new_password_form" class="form-inputs">
-        <input type="password" id="current_password" placeholder="Enter current password" required />
-        <input type="password" id="confirm_password" placeholder="Enter new password" required />
-        <button type="submit" id="reset_password_btn" class="auth-btn" disabled style="background: #F3826C;">
-          Save Password
-        </button>
-      </form>
-      <ul style="margin-top: 10px; font-size: 12px; color: #555;">
-        <li>At least one lowercase character</li>
-        <li>At least one uppercase character</li>
-        <li>8-16 characters</li>
-        <li>Only letters, numbers and common punctuation</li>
-      </ul>
-    </div>
+    .reset-password-card {
+      width: 400px; /* bigger width */
+      padding: 30px 40px; /* more padding */
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background-color: #fff;
+    }
+
+    .auth-card-header svg {
+      width: 28px; /* slightly bigger back arrow */
+      height: 22px;
+    }
+
+    .auth-card-main input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    .auth-card-main button {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+  </style>
+  <div class="reset-password-card auth-card" style="width: 600px; max-width: 90%; padding: 40px 50px; min-height: 400px; box-sizing: border-box;">
+  <div class="auth-card-header">
+    <a href="./login.html">
+      <!-- Back Arrow SVG -->
+      <svg viewBox="0 0 22 17" class="adQfSO" fill="#EE4D2D" width="28" height="22">
+        <g stroke="none" stroke-width="1" fill-rule="evenodd" transform="translate(-3, -6)">
+          <path d="M5.78416545,15.2727801 L12.9866648,21.7122915 C13.286114,22.0067577 13.286114,22.4841029 12.9866648,22.7785691 C12.6864297,23.0738103 12.200709,23.0738103 11.9004739,22.7785691 L3.29347136,15.0837018 C3.27067864,15.0651039 3.23845445,15.072853 3.21723364,15.0519304 C3.06240034,14.899273 2.99480814,14.7001208 3.00030983,14.5001937 C2.99480814,14.3002667 3.06240034,14.1003396 3.21723364,13.9476821 C3.23845445,13.9275344 3.2714646,13.9345086 3.29425732,13.9166857 L11.9004739,6.22026848 C12.200709,5.92657717 12.6864297,5.92657717 12.9866648,6.22026848 C13.286114,6.51628453 13.286114,6.99362977 12.9866648,7.288096 L5.78416545,13.7276073 L24.2140442,13.7276073 C24.6478918,13.7276073 25,14.0739926 25,14.5001937 C25,14.9263948 24.6478918,15.2727801 24.2140442,15.2727801 L5.78416545,15.2727801 Z"></path>
+        </g>
+      </svg>
+    </a>
+    <h2 class="auth-card-title">Reset Password</h2>
   </div>
+
+  <div class="auth-card-main">
+    <form id="new_password_form" class="form-inputs">
+      <input type="password" id="current_password" placeholder="Enter current password" required style="width: 100%; padding: 16px; font-size: 16px; margin-bottom: 18px;" />
+      <input type="password" id="confirm_password" placeholder="Enter new password" required style="width: 100%; padding: 16px; font-size: 16px; margin-bottom: 18px;" />
+      <button type="submit" id="reset_password_btn" class="auth-btn" disabled style="width: 100%; padding: 16px; font-size: 16px; background: #F3826C; border-radius: 8px;">
+        Save Password
+      </button>
+    </form>
+  </div>
+</div>
 </main>
 <!-- Big floating ads -->
  <!-- <div id="big-left-ad" class="big-float-ad left-big">
